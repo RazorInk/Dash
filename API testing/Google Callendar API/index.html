@@ -47,8 +47,9 @@
           width: 5%;
           float: left;
           margin: 1.66%;
-          padding-bottom: 30%;
+          padding-bottom: 1.66%;
           transition: all 0.2s;
+          border-width: 2px;
         }
         .buttonC{
           border: none;
@@ -184,7 +185,7 @@
           'timeMin': (new Date()).toISOString(),
           'showDeleted': false,
           'singleEvents': true,
-          'maxResults': 7,
+          'maxResults': 10,
           'orderBy': 'startTime'
         }).then(function(response) {
           var events = response.result.items;
@@ -200,7 +201,8 @@
               var newDate = new Date(when);
               var names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
               //window.alert(event.summary);
-              appendPre(event.summary + ' {' + names[newDate.getDay()] + '}')
+              
+              appendPre(event.summary+  " "+ names[newDate.getDay()]);
             }
           } else {
             appendPre('No upcoming events found.');
