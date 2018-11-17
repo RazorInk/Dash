@@ -2,12 +2,73 @@
 <html>
   <head>
     	<title>Todo List</title>
-	<script type="text/javascript" src="C:\Users\eleou\Documents\HTML\Todo list Project\assets\js\lib\jquery-3.3.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="C:\Users\eleou\Documents\HTML\Todo list Project\assets\css\Todo.css"> 
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	    <script type="text/javascript" src="C:\Users\eleou\Documents\HTML\Todo list Project\assets\js\lib\jquery-3.3.1.min.js"></script>
+	    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <title>Google Calendar API Quickstart</title>
     <meta charset="utf-8" />
+    <style>
+        .clearDiv{
+          clear: both;
+        }
+        body{
+          /*background-color: black;*/
+        }
+        #topDiv{
+          background-color: #3C76AE;
+          width: 100%;
+          height: 200px;
+          text-align: center;
+          color: white;
+          padding-top: 10px;
+          position: relative;
+          transition: all 0.3s;
+        
+        }
+        #bDiv{
+          margin-top: 40px;
+            margin: 20px auto;
+            max-width: 600px;
+        
+        }
+        #RGBTex{
+          font-size: 46px;
+          text-transform: uppercase;
+        }
+        
+        #optionTab{
+          background-color: white;
+          width: 100%;
+          height: 30px;
+          padding: 2px 30%;
+        }
+        .square{
+          height: 50px;
+          width: 5%;
+          float: left;
+          margin: 1.66%;
+          padding-bottom: 30%;
+          transition: all 0.2s;
+        }
+        .buttonC{
+          border: none;
+          background: none;
+          text-transform: uppercase;
+          height: 100%;
+          font-weight: 700;
+          color: steelblue;
+          letter-spacing: 1px;
+          font-size: inherit;
+          transition: all 0.3s;
+          -webkit-transition: all 0.3s;
+          -moz-transition: all 0.3s;
+          outline: none;
+        }
+        #GameStat{
+          margin: 0px 20%;
+        }
+        
+    </style>
   </head>
   <body>
     <p>Google Calendar API Quickstart</p>
@@ -15,9 +76,12 @@
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
+    <div id="container">
+    <div id ="Tsquare">
+        <pre id="content" style="white-space: pre-wrap;"></pre>
+    </div>
 
-    <pre id="content" style="white-space: pre-wrap;"></pre>
-
+    </div>
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '948776506057-a5acm9r5nr717g3h0md0acpdfkrnrjon.apps.googleusercontent.com';
@@ -102,7 +166,7 @@
         var pre = document.getElementById('content');
         //var textContent = document.createTextNode(message + '\n');
         //pre.appendChild(textContent);
-        var s = '<div id="myDiv">'+ '     4    '+message+'</div>';
+        var s = '<div id="myDiv" class="square">'+message+'</div>';
         var temp = document.createElement('div');
         temp.innerHTML = s;
         var htmlObject = temp.firstChild;
@@ -120,7 +184,7 @@
           'timeMin': (new Date()).toISOString(),
           'showDeleted': false,
           'singleEvents': true,
-          'maxResults': 50,
+          'maxResults': 7,
           'orderBy': 'startTime'
         }).then(function(response) {
           var events = response.result.items;
@@ -133,7 +197,10 @@
               if (!when) {
                 when = event.start.date;
               }
-              appendPre(event.summary + ' (' + when + ')')
+              var newDate = new Date(when);
+              var names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+              //window.alert(event.summary);
+              appendPre(event.summary + ' {' + names[newDate.getDay()] + '}')
             }
           } else {
             appendPre('No upcoming events found.');
