@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    	<title>Todo List</title>
+	<script type="text/javascript" src="C:\Users\eleou\Documents\HTML\Todo list Project\assets\js\lib\jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="C:\Users\eleou\Documents\HTML\Todo list Project\assets\css\Todo.css"> 
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <title>Google Calendar API Quickstart</title>
     <meta charset="utf-8" />
   </head>
@@ -95,8 +100,13 @@
        */
       function appendPre(message) {
         var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
+        //var textContent = document.createTextNode(message + '\n');
+        //pre.appendChild(textContent);
+        var s = '<div id="myDiv">'+ '     4    '+message+'</div>';
+        var temp = document.createElement('div');
+        temp.innerHTML = s;
+        var htmlObject = temp.firstChild;
+        pre.appendChild(htmlObject);
       }
 
       /**
